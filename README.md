@@ -5,7 +5,7 @@ A Django email backend that dynamically selects between Django's SMTP backend an
 ## Features
 - Automatically routes emails based on the sender's address.
 - Uses SMTP for specific addresses defined in your Django settings.
-- Defaults to Mailgun for all other addresses.
+- Defaults to a configurable backend (eg django_mailgun) for all other addresses.
 - Simple integration with existing Django projects.
 
 ## Installation
