@@ -1,3 +1,5 @@
+from email.utils import parseaddr
+
 from django.conf import settings
 from django.core.mail.backends.smtp import EmailBackend as SMTPBackend
 from django.utils.module_loading import import_string
@@ -27,7 +29,9 @@ class SelectiveEmailBackend:
         smtp_addresses = getattr(settings, 'SMTP_EMAIL_ADDRESSES', [])
 
         for message in email_messages:
-            if message.from_email.lower() in (addr.lower() for addr in smtp_addresses):
+            name, email = parseaddr(message.from_email)
+
+            if email.lower() in (addr.lower() for addr in smtp_addresses):
                 backend = self.smtp_backend
             else:
                 backend = self.default_backend
