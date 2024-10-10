@@ -42,8 +42,8 @@ SMTP_EMAIL_ADDRESSES = [
 ]
 
 # Mailgun settings
-MAILGUN_API_KEY = 'mailgun-api-key'
-MAILGUN_DOMAIN = 'mailgun-domain'
+MAILGUN_ACCESS_KEY = 'mailgun-access-key'
+MAILGUN_SERVER_NAME = 'mailgun-server-name'
 
 # SMTP settings
 EMAIL_HOST = 'smtp.janeway.systems'
