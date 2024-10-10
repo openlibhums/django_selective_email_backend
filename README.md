@@ -1,6 +1,6 @@
 # Django Selective Email Backend
 
-A Django email backend that dynamically selects between Django's SMTP backend and `django_mailgun` based on the sender's email address. Configure specific email addresses to use SMTP while defaulting to Mailgun for all other addresses.
+A Django email backend that dynamically selects between Django's SMTP backend and a configurable email backend based on the sender's email address. Configure specific email addresses to use SMTP while falling back to a default backend for all other addresses.
 
 ## Features
 - Automatically routes emails based on the sender's address.
