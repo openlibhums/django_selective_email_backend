@@ -13,7 +13,7 @@ A Django email backend that dynamically selects between Django's SMTP backend an
 Install directly from GitHub using `pip`:
 
 ```bash
-pip install git+https://github.com/yourusername/django-selective-email-backend.git
+pip install -e git+ssh://git@github.com/openlibhums/django_selective_email_backend@36e642fe1db345e5126f0f4fe09bb83b76d79923#egg=django-selective-email-backend
 ```
 
 ## Configuration
@@ -29,6 +29,12 @@ Define the SMTP email addresses and other relevant settings:
 
 ```python
 # settings.py
+INSTALLED_APPS = [
+    ...
+    'selective_email_backend',
+    ...
+]
+
 DEFAULT_EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 SMTP_EMAIL_ADDRESSES = [
     'janeway@janeway.systems',
@@ -43,7 +49,7 @@ MAILGUN_DOMAIN = 'mailgun-domain'
 EMAIL_HOST = 'smtp.janeway.systems'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your-smtp-user'
-EMAIL_HOST_PASSWORD = 'your-smtp-password'
+EMAIL_HOST_USER = 'smtp-user-name'
+EMAIL_HOST_PASSWORD = 'smtp-password'
 
 ```
