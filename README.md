@@ -13,7 +13,7 @@ A Django email backend that dynamically selects between Django's SMTP backend an
 Install directly from GitHub using `pip`:
 
 ```bash
-pip install -e git+ssh://git@github.com/openlibhums/django_selective_email_backend@36e642fe1db345e5126f0f4fe09bb83b76d79923#egg=django-selective-email-backend
+pip install -e git+ssh://git@github.com/openlibhums/django_selective_email_backend@v0.0.2#egg=django-selective-email-backend
 ```
 
 ## Configuration
