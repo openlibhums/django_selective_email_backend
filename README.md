@@ -31,13 +31,13 @@ Define the SMTP email addresses and other relevant settings:
 # settings.py
 DEFAULT_EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 SMTP_EMAIL_ADDRESSES = [
-    'example@berkeley.edu',
-    'another@example.com',
+    'janeway@janeway.systems',
+    'chakotay@janeway.systems',
 ]
 
 # Mailgun settings
-MAILGUN_API_KEY = 'your-mailgun-api-key'
-MAILGUN_DOMAIN = 'your-mailgun-domain'
+MAILGUN_API_KEY = 'mailgun-api-key'
+MAILGUN_DOMAIN = 'mailgun-domain'
 
 # SMTP settings
 EMAIL_HOST = 'smtp.example.com'
