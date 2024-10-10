@@ -40,7 +40,7 @@ MAILGUN_API_KEY = 'mailgun-api-key'
 MAILGUN_DOMAIN = 'mailgun-domain'
 
 # SMTP settings
-EMAIL_HOST = 'smtp.example.com'
+EMAIL_HOST = 'smtp.janeway.systems'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'your-smtp-user'
