@@ -1,11 +1,12 @@
 # Django Selective Email Backend
 
-A Django email backend that dynamically selects between Django's SMTP backend and a configurable email backend based on the sender's email address. Configure specific email addresses to use SMTP while falling back to a default backend for all other addresses.
+A Django email backend that dynamically selects between multiple SMTP backends and a configurable default backend based on the sender's email address. Configure per-sender SMTP settings in your Django settings, and fall back to a default backend (e.g. `django_mailgun`) for all other addresses.
 
 ## Features
+
 - Automatically routes emails based on the sender's address.
-- Uses SMTP for specific addresses defined in your Django settings.
-- Defaults to a configurable backend (eg django_mailgun) for all other addresses.
+- Supports multiple SMTP configurations mapped to specific email addresses.
+- Defaults to a configurable backend (e.g. `django_mailgun`) for all other addresses.
 - Simple integration with existing Django projects.
 
 ## Installation
@@ -13,19 +14,18 @@ A Django email backend that dynamically selects between Django's SMTP backend an
 Install directly from GitHub using `pip`:
 
 ```bash
-pip install -e git+ssh://git@github.com/openlibhums/django_selective_email_backend@v0.0.2#egg=django-selective-email-backend
+pip install git+ssh://git@github.com/openlibhums/django_selective_email_backend@v0.1#egg=django-selective-email-backend
 ```
 
 ## Configuration
 
-Add the backend to your settings.py:
+Add the backend to your `settings.py`:
 
 ```python
 EMAIL_BACKEND = 'selective_email_backend.backends.SelectiveEmailBackend'
 ```
 
-Define the SMTP email addresses and other relevant settings:
-
+Configure a default backend and per-address SMTP settings:
 
 ```python
 # settings.py
@@ -36,20 +36,31 @@ INSTALLED_APPS = [
 ]
 
 DEFAULT_EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
-SMTP_EMAIL_ADDRESSES = [
-    'janeway@janeway.systems',
-    'chakotay@janeway.systems',
-]
 
-# Mailgun settings
+# Mailgun settings (default backend)
 MAILGUN_ACCESS_KEY = 'mailgun-access-key'
 MAILGUN_SERVER_NAME = 'mailgun-server-name'
 
-# SMTP settings
-EMAIL_HOST = 'smtp.janeway.systems'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'smtp-user-name'
-EMAIL_HOST_PASSWORD = 'smtp-password'
-
+# Multi-SMTP settings (per-sender)
+MULTI_SMTP_CONFIG = {
+    'janeway@janeway.systems': {
+        'EMAIL_HOST': 'smtp.janeway.systems',
+        'EMAIL_PORT': 587,
+        'EMAIL_HOST_USER': 'janeway@janeway.systems',
+        'EMAIL_HOST_PASSWORD': 'smtp-password-janeway',
+        'EMAIL_USE_TLS': True,
+    },
+    'chakotay@janeway.systems': {
+        'EMAIL_HOST': 'smtp.janeway.systems',
+        'EMAIL_PORT': 587,
+        'EMAIL_HOST_USER': 'chakotay@janeway.systems',
+        'EMAIL_HOST_PASSWORD': 'smtp-password-chakotay',
+        'EMAIL_USE_TLS': True,
+    },
+}
 ```
+
+## Notes
+
+- Email addresses in `MULTI_SMTP_CONFIG` are matched case-insensitively.
+- All addresses not listed in `MULTI_SMTP_CONFIG` will use the backend specified by `DEFAULT_EMAIL_BACKEND`.
